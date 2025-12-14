@@ -6,10 +6,10 @@ const CONFIG = {
     MAX_ATTEMPTS: 5,
     ANNIVERSARY_DATE: new Date(new Date().getFullYear() + 1, 0, 1), // Next year Jan 1st
     MEMORIES: [
-        { src: "assets/us1.jpeg", title: "Photo-genic Gul vs Photo-Hating Me", desc: "You being the photo-genic one and me being exactly the opposite!" },
-        { src: "assets/us2.png", title: "Bullet Rides Together", desc: "Our Bullet Rides Together. 😘" },
-        { src: "assets/us3.png", title: "Late Night Chai Drives", desc: "Late Night Drives to Get Chai for you. ❤️" },
-        { src: "assets/us4.png", title: "Best Kisser Ever", desc: "You Being the Best Kisser Ever!" }
+        { src: "../assets/us1.jpeg", title: "Photo-genic Gul vs Photo-Hating Me", desc: "You being the photo-genic one and me being exactly the opposite!" },
+        { src: "../assets/us2.png", title: "Bullet Rides Together", desc: "Our Bullet Rides Together. 😘" },
+        { src: "../assets/us3.png", title: "Late Night Chai Drives", desc: "Late Night Drives to Get Chai for you. ❤️" },
+        { src: "../assets/us4.png", title: "Best Kisser Ever", desc: "You Being the Best Kisser Ever!" }
     ],
     LOVE_LEVELS: [
         "Just Starting",

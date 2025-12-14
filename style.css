@@ -347,21 +347,21 @@
       line-height: 1.6;
     }
 
-    .hero-card-photo {
-      position: relative;
-      width: 100%;
-      border-radius: 20px;
-      overflow: hidden;
-      background: radial-gradient(circle at top, #ff4f7b 0, #15182a 35%, #05060a 100%);
-      aspect-ratio: 4 / 3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 13px;
-      cursor: pointer;
-      transition: transform var(--transition);
-    }
+.hero-card-photo {
+  position: relative;
+  width: 100%;
+  height: 420px; /* keep your existing height if different */
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+
+  /* 👇 Permanent photo */
+  background-image: url("assets/moon.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 
     .hero-card-photo:hover {
       transform: scale(1.02);
