@@ -275,7 +275,7 @@ function updateLoveMeter() {
 function toggleMusic() {
     if (!state.backgroundMusic) {
         // Create audio element
-        state.backgroundMusic = new Audio('assets/music.mp3'); // ← Add your file path here
+        state.backgroundMusic = new Audio('../assets/music.mp3'); // ← Add your file path here
         state.backgroundMusic.loop = true;
         state.backgroundMusic.volume = 0.3;
 
