@@ -1,0 +1,262 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background: #000;
+  color: #fff;
+}
+
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.logo {
+  color: #e50914;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.hero {
+  height: 100vh;
+  background: url("assets/gulandshivamhome.png") center/cover no-repeat;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, black, transparent);
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 20%;
+  left: 5%;
+}
+
+.hero-content h1 {
+  font-size: 4em;
+  letter-spacing: 4px;
+}
+
+.subtitle {
+  font-size: 1.5em;
+  color: #ccc;
+}
+
+.meta {
+  margin: 10px 0;
+  color: #aaa;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: #e50914;
+  border: none;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.episode, .finale {
+  padding: 100px 10%;
+  font-size: 1.2em;
+  line-height: 1.8;
+}
+
+.memories {
+  padding: 80px 10%;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cards img {
+  width: 260px;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.cards img:hover {
+  transform: scale(1.08);
+}
+
+.trailer {
+  padding: 80px 10%;
+}
+
+.trailer {
+  padding-top: 40px;
+}
+
+.trailer h2 {
+  margin-bottom: 25px;
+}
+
+.trailer video {
+  margin-top: 10px;
+}
+
+
+video {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #888;
+}
+
+.section-header {
+  padding: 60px 10% 20px;
+}
+
+.section-header h2 {
+  font-size: 1.8em;
+  font-weight: 600;
+  border-left: 4px solid #e50914;
+  padding-left: 15px;
+  color: #fff;
+}
+
+.love-note {
+  margin: 40px 10%;
+  padding: 30px;
+  background: rgba(255,255,255,0.05);
+  border-left: 4px solid #e50914;
+  border-radius: 6px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: #eee;
+}
+
+#lockScreen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lock-box {
+  text-align: center;
+  color: #fff;
+  max-width: 400px;
+  padding: 40px;
+}
+
+.lock-box h1 {
+  color: #e50914;
+  margin-bottom: 10px;
+}
+
+.lock-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 15px 0;
+  background: #111;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 1em;
+}
+
+.lock-box button {
+  width: 100%;
+  padding: 12px;
+  background: #e50914;
+  border: none;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#errorMsg {
+  color: #e50914;
+  margin-top: 10px;
+}
+
+#mainContent {
+  display: none;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.episode-image {
+  margin-top: 30px;
+}
+
+.episode-image img {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+.teaser {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 4px solid #e50914;
+  padding: 40px;
+  margin: 60px auto;
+  max-width: 900px;
+}
+
+.teaser h2 {
+  color: #e50914;
+  margin-bottom: 15px;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scroll-down span {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: rotate(45deg);
+  animation: bounce 1.5s infinite;
+  opacity: 0.8;
+}
+
+@keyframes bounce {
+  0% {
+    transform: rotate(45deg) translate(0, 0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: rotate(45deg) translate(6px, 6px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) translate(0, 0);
+    opacity: 0.4;
+  }
+}
