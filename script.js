@@ -2,7 +2,7 @@
 // CONFIGURATION
 // ====================
 const CONFIG = {
-    PASSWORD: "Shivam@0720", // Your secret password
+    PASSWORD: "10012002", // Your secret password
     MAX_ATTEMPTS: 5,
     ANNIVERSARY_DATE: new Date(new Date().getFullYear() + 1, 0, 1), // Next year Jan 1st
     MEMORIES: [
@@ -278,7 +278,7 @@ function toggleMusic() {
         state.backgroundMusic = new Audio('assets/music.mp3'); // ← Add your file path here
         state.backgroundMusic.loop = true;
         state.backgroundMusic.volume = 0.3;
-        
+
         // You can add your own background music file
         // state.backgroundMusic.src = 'assets/background-music.mp3';
         
