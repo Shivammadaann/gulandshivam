@@ -1,356 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gul & Shivam's Journey!</title>
-  <link rel="icon" href="favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">  
+  <meta charset="UTF-8" />
+  <title>For My Favorite Person</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-  <!-- Progress Bar -->
-  <div class="progress-bar" id="progressBar"></div>
+  <!-- Floating Hearts -->
+  <div class="floating-hearts" id="floatingHearts"></div>
 
-  <!-- PASSWORD SCREEN -->
-  <div id="lockScreen">
-    <div class="lock-box">
-      <div class="heart-lock">
-        <i class="fas fa-lock"></i>
-        <i class="fas fa-heart"></i>
+  <!-- Photo Upload Modal -->
+  <div class="modal" id="photoModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Your Special Photo</h3>
+        <p class="modal-text">Upload a photo that means something to both of us</p>
       </div>
-      <h1>Private Screening 🔒</h1>
-      <p class="sub-lock">Only Accessible to My Gul!</p>
-      <div class="password-container">
-        <input type="password" id="passwordInput" placeholder="Enter Password" autocomplete="off">
-        <button onclick="unlock()" class="unlock-btn">
-          <i class="fas fa-key"></i> Unlock
+      <input type="file" id="photoInput" accept="image/*" style="display: none;">
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="document.getElementById('photoInput').click()">
+          Choose Photo
+        </button>
+        <button class="btn-ghost" onclick="closeModal()">
+          Maybe Later
         </button>
       </div>
-      <p class="hint">Hint: It's my Birthday! (DDMMYYYY)</p>
-      <p id="errorMsg"></p>
     </div>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div id="mainContent">
-    <header class="nav">
-      <div class="logo">
-       Gul & Shivam's Personal NETFLIX <i class="fas fa-heart"></i> 
-      </div>
-      <div class="nav-right">
-        <div class="music-toggle">
-          <button id="musicBtn" onclick="toggleMusic()">
-            <i class="fas fa-music"></i> Play Music
-          </button>
-        </div>
-        <div class="profile">❤️</div>
+  <div class="page">
+    <!-- NAV -->
+    <header class="nav" id="nav">
+      <div class="shell nav-inner">
+        <div class="nav-logo">For Gul. 💕</div>
+        <nav class="nav-links">
+          <a href="#story" class="nav-link">Home</a>
+          <a href="#memories" class="nav-link">Surprise!</a>
+        </nav>
       </div>
     </header>
 
-    <section class="hero">
-      <div class="overlay"></div>
-      <div class="hero-content fade-in">
-        <h1>Gul & Shivam  <i class="fas fa-heart"></i></h1>
-        <p class="subtitle">The Most Unexpected yet Most Adventurous Love Story!</p>
-        <p class="meta">Romance • Real Life • Forever</p>
-        <button class="play-btn" onclick="scrollToStory()">
-          <i class="fas fa-play"></i> Play Our Story
-        </button>
-        <div class="hero-stats">
-          <div class="stat">
-            <i class="fas fa-calendar-alt"></i>
-            <span>Season 1 • 2025</span>
+    <!-- HERO -->
+    <main>
+      <section class="hero">
+        <div class="shell hero-grid">
+          <div>
+            <div class="hero-eyebrow">For my best girl ever!</div>
+            <h1 class="hero-title">Here's a Little Surprise for you.</h1>
+            <p class="hero-subtitle">
+              Thank you for Existing
+              & Making My Life Better.
+            </p>
+            <div class="hero-actions">
+            <a href="./surprise/" class="btn-primary">
+  Explore Gul & Shivam's Journey!
+</a>
+            </button>
+            </div>
+            <div class="hero-meta">
+              Best viewed with your heart open.
+            </div>
           </div>
-          <div class="stat">
-            <i class="fas fa-star"></i>
-            <span>5.0 ★ Rating</span>
-          </div>
-          <div class="stat">
-            <i class="fas fa-clock"></i>
-            <span>Lifetime Runtime</span>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-down">
-        <span></span>
-      </div>
-    </section>
 
-    <section class="trailer">
-      <h2><i class="fas fa-film"></i> Official Trailer</h2>
-      <div class="video-container">
-        <video controls poster="assets/thumbnail.png">
-          <source src="assets/trailervid.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <div class="video-overlay">
-          <button class="play-video-btn" onclick="playTrailer()">
-            <i class="fas fa-play-circle"></i>
-          </button>
+          <aside>
+            <div class="chip">
+              <span class="chip-dot"></span>
+              Live • from my heart
+            </div>
+            <article class="hero-card">
+              <div class="orb"></div>
+              <div class="hero-card-tag">Tiny universe</div>
+              <p class="hero-card-text">
+                If the internet is endless, this is the one corner that belongs only to us.
+                No notifications. No noise. Just you and the way you changed my life.
+              </p>
+              <div class="hero-card-photo" id="mainPhoto" onclick="openPhotoModal()">
+                <span>Click to add our favorite photo</span>
+                <div class="hero-card-overlay"></div>
+                <div class="hero-card-caption">Somewhere between your laugh and your eyes, I found my safe place.</div>
+              </div>
+            </article>
+          </aside>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="episode fade-in">
-      <div class="episode-header">
-        <span class="season-badge">Season 1</span>
-        <h2>Episode 1: The Beginning</h2>
-        <div class="episode-meta">
-          <span><i class="far fa-clock"></i> 45 min</span>
-          <span><i class="far fa-calendar"></i> March 2023</span>
-        </div>
-      </div>
-      <p class="episode-desc">
-        It didn't start like a movie.<br>
-        Instead, it began with me being your asshole senior at the office!<br>
-        You started as nothing more than a Junior to me and you ended up being my everything. ❤️
-      </p>
-      <div class="episode-image">
-        <img src="assets/yelling.png" alt="Our Beginning" loading="lazy">
-        <div class="image-caption">Here's a literal cartoon of how we'd be in office!</div>
-      </div>
-      <div class="episode-quote">
-        <i class="fas fa-quote-left"></i>
-        Sometimes the best things begin with the worst impressions.
-        <i class="fas fa-quote-right"></i>
-      </div>
-    </section>
+    </main>
 
-    <section class="episode fade-in">
-      <div class="episode-header">
-        <span class="season-badge">Season 1</span>
-        <h2>Episode 2: More Than Just Colleagues</h2>
-        <div class="episode-meta">
-          <span><i class="far fa-clock"></i> 52 min</span>
-          <span><i class="far fa-calendar"></i> June 2023</span>
-        </div>
-      </div>
-      <p class="episode-desc">
-        Somewhere between being your shitty senior to late-night talks,<br>
-        random smiles,<br>
-        and missing you a little too much…<br>
-        I fell for you, hard. ❤️
-      </p>
-      <div class="episode-image">
-        <img src="assets/beginning.png" alt="Our Beginning" loading="lazy">
-        <div class="image-caption">When work chats became heart-to-hearts</div>
-      </div>
-    </section>
-
-    <section class="finale">
-      <div class="finale-content">
-        <h2><i class="fas fa-crown"></i> Season Finale</h2>
-        <div class="finale-text">
-          <p>Baby,</p>
-          <p>This isn't just a season.</p>
-          <p>It's a lifetime I want with you.</p>
-          <div class="finale-highlight">
-            Same story.<br>
-            Same love.<br>
-            Every season, Every Episode, Every Day, Every Hour & Every Minute.
-          </div>
-        </div>
-        <div class="finale-heart">
-          <i class="fas fa-heart"></i>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-header">
-      <h2><i class="fas fa-star"></i> Fan Favourite Moments from the Series 😍</h2>
-      <p class="section-subtitle">Click on any photo to relive the memory.</p>
-    </section>
-
-  <section class="memories">
-  <div class="memory-grid">
-    <div class="memory-card" onclick="openMemory(0)" data-memory-index="0">
-      <img src="assets/us1.jpeg" alt="Photo Comparison" loading="lazy">
-      <div class="memory-overlay">
-        <i class="fas fa-expand"></i>
-        <p>You being the photo-genic one and me being exactly the opposite!</p>
-      </div>
-    </div>
-    <div class="memory-card" onclick="openMemory(1)" data-memory-index="1">
-      <img src="assets/us2.png" alt="Bullet Rides" loading="lazy">
-      <div class="memory-overlay">
-        <i class="fas fa-expand"></i>
-        <p>Our Bullet Rides Together. 😘</p>
-      </div>
-    </div>
-    <div class="memory-card" onclick="openMemory(2)" data-memory-index="2">
-      <img src="assets/us3.png" alt="Late Night Drives" loading="lazy">
-      <div class="memory-overlay">
-        <i class="fas fa-expand"></i>
-        <p>Late Night Drives to Get Chai for you. ❤️</p>
-      </div>
-    </div>
-    <div class="memory-card" onclick="openMemory(3)" data-memory-index="3">
-      <img src="assets/us4.png" alt="Best Kisser" loading="lazy">
-      <div class="memory-overlay">
-        <i class="fas fa-expand"></i>
-        <p>You Being the Best Kisser Ever!</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <section class="section-header">
-      <h2><i class="fas fa-envelope-open-heart"></i> Love Note from your Shehzada :)</h2>
-    </section>
-
-    <section class="love-note">
-      <div class="note-container">
-        <div class="note-header">
-          <i class="fas fa-feather-alt"></i>
-          <h3>To My Dearest Gul,</h3>
-        </div>
-        <div class="note-content">
-          <p>
-            I don't know when it happened —<br>
-            there was no exact moment, no dramatic scene.<br>
-            Just you slowly becoming my favorite thought every day.
-          </p>
-          <div class="note-highlight">
-            <i class="fas fa-quote-left"></i>
-            In a world full of noise, you feel like peace.<br>
-            Your smile feels like home.
-            <i class="fas fa-quote-right"></i>
-          </div>
-          <p>
-            This is just a note,<br>
-            but my feelings for you are a whole series —<br>
-            with no final episode planned.<br>
-            Thank you for being my peace, always!
-          </p>
-        </div>
-        <div class="note-signature">
-          <p>Always & Forever yours,</p>
-          <h4>Shehzada ❤️</h4>
-        </div>
-        <div class="note-seal">
-          <i class="fas fa-heart"></i>
-          <span>Sealed with Love</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="teaser">
-      <div class="teaser-header">
-        <span class="teaser-badge">Coming Soon</span>
-        <h2><i class="fas fa-tv"></i> Season 2 is Currently Under Production!</h2>
-      </div>
-      <div class="teaser-content">
-        <p>
-          Gul and Shivam will be back,<br>
-          to make you feel more wholesome with their existence! ❤️
-        </p>
-        <div class="teaser-highlight">
-          Gul, you will always be the Elena to my Damon!<br>
-          Camie to my Klaus,<br>
-          Eleven to my Mike. ❤️
-        </div>
-        <div class="teaser-countdown">
-          <p>Season 2 premieres in: <span id="season2Days">365</span> days</p>
-          <div class="teaser-progress">
-            <div class="teaser-progress-fill"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-      <section class="interactive">
-      <h2><i class="fas fa-chart-line"></i> Our Love Meter 💖</h2>
-      <div class="love-meter-container">
-        <div class="meter-info">
-          <p>Current Love Level</p>
-          <p id="lovePercentage" class="percentage">100%</p>
-        </div>
-        <div class="meter-bar">
-          <div class="meter-fill" id="loveFill" style="width: 100%"></div>
-          <div class="meter-ticks">
-            <span>0%</span>
-            <span>50%</span>
-            <span>100%</span>
-            <span>150%</span>
-            <span>200%</span>
-          </div>
-        </div>
-        <button class="love-btn" onclick="increaseLove()">
-          <i class="fas fa-heart-circle-plus"></i> Increase Our Love
-        </button>
-        <p class="love-note-small">Click to make our love grow even more! ❤️</p>
-      </div>
-    </section>
-
+    <!-- FOOTER -->
     <footer>
-      <div class="footer-content">
-        <div class="footer-logo">
-          <i class="fas fa-heart"></i> Gul & Shivam
-        </div>
-        <p class="footer-text">Made with <i class="fas fa-heart"></i> • For my Gul. ❤️</p>
-        <div class="footer-social">
-          <p>Our Story Continues On:</p>
-          <div class="social-icons">
-            <button class="social-btn" onclick="showSecretMessage()">
-              <i class="fas fa-mobile-alt"></i>
-            </button>
-            <button class="social-btn" onclick="showSecretMessage()">
-              <i class="fas fa-envelope"></i>
-            </button>
-            <button class="social-btn" onclick="showSecretMessage()">
-              <i class="fas fa-heart"></i>
-            </button>
-          </div>
-        </div>
-        <p class="footer-copyright">© 2025, Our Love Story. All Moments reserved. ❤️</p>
-        </button>
-      </div>
+      Made with too many thoughts about you • <span id="year"></span> •
+      <span id="heartCount">0</span> hearts sent
     </footer>
-
-    <!-- Memory Lightbox -->
-    <div id="memoryLightbox" class="memory-lightbox">
-      <button class="lightbox-close" onclick="closeMemory()">
-        <i class="fas fa-times"></i>
-      </button>
-      <button class="lightbox-prev" onclick="prevMemory()">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <div class="lightbox-content">
-        <img id="lightboxImage" src="" alt="Memory">
-        <div class="lightbox-caption">
-          <h3 id="lightboxTitle"></h3>
-          <p id="lightboxDesc"></p>
-        </div>
-      </div>
-      <button class="lightbox-next" onclick="nextMemory()">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
-
-    <!-- Secret Message Modal -->
-    <div id="secretModal" class="secret-modal">
-      <div class="secret-content">
-        <button class="secret-close" onclick="closeSecretModal()">
-          <i class="fas fa-times"></i>
-        </button>
-        <div class="secret-heart">
-          <i class="fas fa-heart"></i>
-        </div>
-        <h3>Just For You, Gul! 💖</h3>
-        <p class="secret-message">
-          All our real conversations happen in person, in whispers,<br>
-          and in the spaces between our heartbeats.<br><br>
-          This button? It's just a reminder that I'm always thinking of you.
-        </p>
-        <button class="secret-ok" onclick="closeSecretModal()">
-          I Love You Too ❤️
-        </button>
-      </div>
-    </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Initialize
+    document.getElementById("year").textContent = new Date().getFullYear();
+    createFloatingHearts();
+    setupScrollEffect();
+
+    // Smooth scroll function
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
+    // Create floating hearts
+    function createFloatingHearts() {
+      const container = document.getElementById('floatingHearts');
+      const hearts = ['♥', '💕', '💖', '💗', '💓', '💞', '💝'];
+      
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = Math.random() * 20 + 's';
+        heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
+        heart.style.opacity = Math.random() * 0.5 + 0.3;
+        container.appendChild(heart);
+      }
+    }
+
+    // Nav scroll effect
+    function setupScrollEffect() {
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      });
+    }
+
+    // Modal functions
+    function openPhotoModal() {
+      document.getElementById('photoModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('photoModal').style.display = 'none';
+    }
+
+    // Photo upload handling
+    document.getElementById('photoInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const photoContainer = document.getElementById('mainPhoto');
+          photoContainer.style.backgroundImage = `url(${e.target.result})`;
+          photoContainer.style.backgroundSize = 'cover';
+          photoContainer.style.backgroundPosition = 'center';
+          photoContainer.innerHTML = `
+            <div class="hero-card-overlay"></div>
+            <div class="hero-card-caption">I Love You 💕</div>
+          `;
+          closeModal();
+          saveToLocalStorage('mainPhoto', e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Edit story card
+    let isEditing = false;
+    function editStoryCard(card) {
+      if (!isEditing) {
+        isEditing = true;
+        card.contentEditable = true;
+        card.focus();
+        document.addEventListener('click', function outsideClick(e) {
+          if (!card.contains(e.target)) {
+            card.contentEditable = false;
+            isEditing = false;
+            saveToLocalStorage('storyCard', card.innerHTML);
+            document.removeEventListener('click', outsideClick);
+          }
+        });
+      }
+    }
+
+    // Add memory photo
+    function addMemoryPhoto(card) {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            card.style.backgroundImage = `url(${e.target.result})`;
+            card.style.backgroundSize = 'cover';
+            card.style.backgroundPosition = 'center';
+            const index = Array.from(card.parentNode.children).indexOf(card);
+            saveToLocalStorage(`memory${index}`, e.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      input.click();
+    }
+
+    // Heart counter
+    let heartCount = 0;
+    function addHeart() {
+      heartCount++;
+      document.getElementById('heartCount').textContent = heartCount;
+      localStorage.setItem('heartCount', heartCount);
+      
+      // Create a floating heart at cursor
+      const heart = document.createElement('div');
+      heart.textContent = '♥';
+      heart.style.position = 'fixed';
+      heart.style.color = 'var(--accent)';
+      heart.style.fontSize = '24px';
+      heart.style.pointerEvents = 'none';
+      heart.style.zIndex = '1000';
+      heart.style.animation = 'floatUp 2s ease-out forwards';
+      document.body.appendChild(heart);
+      
+      // Remove after animation
+      setTimeout(() => heart.remove(), 2000);
+    }
+
+    // Song player simulation
+    function playSong() {
+      // Replace with your Spotify/Apple Music link
+      const songUrl = "https://open.spotify.com/";
+      window.open(songUrl, '_blank');
+    }
+
+    function seekSong(event) {
+      const progressBar = event.currentTarget;
+      const rect = progressBar.getBoundingClientRect();
+      const percentage = (event.clientX - rect.left) / rect.width;
+      const progress = progressBar.querySelector('.progress');
+      progress.style.width = (percentage * 100) + '%';
+    }
+
+    // Local storage helpers
+    function saveToLocalStorage(key, value) {
+      localStorage.setItem(key, value);
+    }
+
+    function loadFromLocalStorage(key) {
+      return localStorage.getItem(key);
+    }
+
+    // Load saved data on page load
+    window.addEventListener('load', () => {
+      // Load main photo
+      const savedPhoto = loadFromLocalStorage('mainPhoto');
+      if (savedPhoto) {
+        const photoContainer = document.getElementById('mainPhoto');
+        photoContainer.style.backgroundImage = `url(${savedPhoto})`;
+        photoContainer.style.backgroundSize = 'cover';
+        photoContainer.style.backgroundPosition = 'center';
+        photoContainer.innerHTML = `
+          <div class="hero-card-overlay"></div>
+          <div class="hero-card-caption">I Love You 💕</div>
+        `;
+      }
+
+      // Load story card
+      const savedStory = loadFromLocalStorage('storyCard');
+      if (savedStory) {
+        document.querySelector('.story-card').innerHTML = savedStory;
+      }
+
+      // Load heart count
+      const savedHearts = loadFromLocalStorage('heartCount');
+      if (savedHearts) {
+        heartCount = parseInt(savedHearts);
+        document.getElementById('heartCount').textContent = heartCount;
+      }
+
+      // Load memories
+      for (let i = 0; i < 4; i++) {
+        const memory = loadFromLocalStorage(`memory${i}`);
+        if (memory) {
+          const card = document.querySelectorAll('.memory-card')[i];
+          card.style.backgroundImage = `url(${memory})`;
+          card.style.backgroundSize = 'cover';
+          card.style.backgroundPosition = 'center';
+        }
+      }
+    });
+
+    // Add click effect to all buttons
+    document.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Ripple effect
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.3);
+          transform: scale(0);
+          animation: ripple 0.6s linear;
+          width: ${size}px;
+          height: ${size}px;
+          top: ${y}px;
+          left: ${x}px;
+        `;
+        
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    // Add CSS for ripple effect
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
