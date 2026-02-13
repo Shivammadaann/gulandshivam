@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --secondary-pink: #ffb3c1;
+            --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
+            --glass: rgba(255, 255, 255, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-gradient);
+            color: #590d22;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-bottom: 50px; /* Space at the very bottom */
+        }
+
+        /* Floating Hearts Background */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart-particle {
+            position: absolute;
+            color: var(--primary-pink);
+            opacity: 0.3;
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Layout - REDUCED GAPS HERE */
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem; /* Reduced vertical padding */
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        /* First section gets a bit more top space */
+        section:first-of-type {
+            padding-top: 5rem;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 700px;
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-pink);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .highlight {
+            color: var(--primary-pink);
+            font-weight: 700;
+        }
+
+        /* Buttons */
+        .btn-container {
+            position: relative;
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            min-height: 60px;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        #yesBtn {
+            background-color: var(--primary-pink);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #noBtn {
+            background-color: #6c757d;
+            color: white;
+            position: relative;
+        }
+
+        /* Success Message Overlay */
+        #success-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-gradient);
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            p { font-size: 1.1rem; }
+            .card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts-bg" id="hearts-bg"></div>
+
+    <!-- Section 1 -->
+    <section class="reveal">
+        <div class="card">
+            <h1>Happy Valentine's Day, Baby! ❤️</h1>
+            <p>You are my forever valentine and the light of my life.</p>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="reveal">
+        <div class="card">
+            <p>I know I haven't always been the perfect boyfriend.</p>
+            <p>But believe me, <span class="highlight">I intend to be the best husband</span> to you in the future.</p>
+            <p>I love you more than you will ever know.</p>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="reveal">
+        <div class="card">
+            <p>I'm sorry I don't have fancy gifts for you today...</p>
+            <p>But I have my heart and my promise to give you everything.</p>
+            <p class="highlight">Just know...</p>
+            <p>I am the luckiest guy to have you by my side.</p>
+        </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="reveal">
+        <div class="card">
+            <h1>So, the question is...</h1>
+            <p style="font-size: 1.8rem; margin-top: 10px;">Will you be my Valentine? 🌹</p>
+            
+            <div class="btn-container">
+                <button class="btn" id="yesBtn">YES! ❤️</button>
+                <button class="btn" id="noBtn">No 😢</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success View -->
+    <div id="success-message">
+        <div class="card">
+            <h1>Yay! Best Decision Ever! ❤️</h1>
+            <p>I promise to love you with all my heart, forever and always.</p>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYyY3FkZzhyeW16eXN6eHlodzZ4eXN6eHlodzZ4eXN6eHlodzZ4JnB0X2luc2lkZT10cnVlJmFwcD1mcmVl/MDJ9IbxxvDUQM/giphy.gif" alt="Cute Cat" style="width: 100%; max-width: 300px; border-radius: 20px; margin-top: 1rem;">
+        </div>
+    </div>
+
+    <script>
+        // Floating Hearts Background
+        function createHearts() {
+            const container = document.getElementById('hearts-bg');
+            const heartIcons = ['❤️', '💖', '💗', '💓', '💕'];
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDelay = Math.random() * 10 + 's';
+                heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // Scroll Reveal Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Runaway "No" Button
+        const noBtn = document.getElementById('noBtn');
+        const moveButton = () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        };
+        noBtn.addEventListener('mouseover', moveButton);
+
+        // "Yes" Button Confetti
+        const yesBtn = document.getElementById('yesBtn');
+        const successMsg = document.getElementById('success-message');
+        yesBtn.addEventListener('click', () => {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4d6d', '#ffb3c1', '#ffffff']
+            });
+            setTimeout(() => {
+                successMsg.style.display = 'flex';
+                successMsg.style.opacity = '1';
+            }, 500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">  
+  <meta charset="UTF-8" />
+  <title>For My Favorite Person</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <!-- Floating Hearts -->
+  <div class="floating-hearts" id="floatingHearts"></div>
+
+  <!-- Photo Upload Modal -->
+  <div class="modal" id="photoModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Your Special Photo</h3>
+        <p class="modal-text">Upload a photo that means something to both of us</p>
+      </div>
+      <input type="file" id="photoInput" accept="image/*" style="display: none;">
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="document.getElementById('photoInput').click()">
+          Choose Photo
+        </button>
+        <button class="btn-ghost" onclick="closeModal()">
+          Maybe Later
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page">
+    <!-- NAV -->
+    <header class="nav" id="nav">
+      <div class="shell nav-inner">
+        <div class="nav-logo">For Gul. 💕</div>
+        <nav class="nav-links">
+          <a href="#story" class="nav-link">Home</a>
+          <a href="./surprise/" class="nav-link">Surprise!</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero">
+        <div class="shell hero-grid">
+          <div>
+            <div class="hero-eyebrow">For my best girl ever!</div>
+            <h1 class="hero-title">Here's a Little Surprise for you.</h1>
+            <p class="hero-subtitle">
+              Thank you for Existing
+              & Making My Life Better.
+            </p>
+            <div class="hero-actions">
+            <a href="./surprise/" class="btn-primary">
+  Explore Gul & Shivam's Journey!
+</a>
+            </button>
+            </div>
+            <div class="hero-meta">
+              Best viewed with your heart open.
+            </div>
+          </div>
+
+          <aside>
+            <div class="chip">
+              <span class="chip-dot"></span>
+              Live • from my heart
+            </div>
+            <article class="hero-card">
+              <div class="orb"></div>
+              <div class="hero-card-tag">You Deserve This!</div>
+              <p class="hero-card-text">
+                In the world full of choas and distractions, you are my calm. 🥰
+                Enjoy the Surprise.
+              </p>
+             <div class="hero-card-photo" id="mainPhoto" onclick="openPhotoModal()">
+  <div class="hero-card-overlay"></div>
+  <div class="hero-card-caption">
+    Somewhere between your laugh and your eyes, I found my safe place.
+  </div>
+
+            </article>
+          </aside>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      Made with too many thoughts about you • <span id="year"></span> •
+      <span id="heartCount">0</span> hearts sent
+    </footer>
+  </div>
+
+  <script>
+    // Initialize
+    document.getElementById("year").textContent = new Date().getFullYear();
+    createFloatingHearts();
+    setupScrollEffect();
+
+    // Smooth scroll function
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
+    // Create floating hearts
+    function createFloatingHearts() {
+      const container = document.getElementById('floatingHearts');
+      const hearts = ['♥', '💕', '💖', '💗', '💓', '💞', '💝'];
+      
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = Math.random() * 20 + 's';
+        heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
+        heart.style.opacity = Math.random() * 0.5 + 0.3;
+        container.appendChild(heart);
+      }
+    }
+
+    // Nav scroll effect
+    function setupScrollEffect() {
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      });
+    }
+
+    // Modal functions
+    function openPhotoModal() {
+      document.getElementById('photoModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('photoModal').style.display = 'none';
+    }
+
+    // Photo upload handling
+    document.getElementById('photoInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const photoContainer = document.getElementById('mainPhoto');
+          photoContainer.style.backgroundImage = `url(${e.target.result})`;
+          photoContainer.style.backgroundSize = 'cover';
+          photoContainer.style.backgroundPosition = 'center';
+          photoContainer.innerHTML = `
+            <div class="hero-card-overlay"></div>
+            <div class="hero-card-caption">I Love You 💕</div>
+          `;
+          closeModal();
+          saveToLocalStorage('mainPhoto', e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Edit story card
+    let isEditing = false;
+    function editStoryCard(card) {
+      if (!isEditing) {
+        isEditing = true;
+        card.contentEditable = true;
+        card.focus();
+        document.addEventListener('click', function outsideClick(e) {
+          if (!card.contains(e.target)) {
+            card.contentEditable = false;
+            isEditing = false;
+            saveToLocalStorage('storyCard', card.innerHTML);
+            document.removeEventListener('click', outsideClick);
+          }
+        });
+      }
+    }
+
+    // Add memory photo
+    function addMemoryPhoto(card) {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            card.style.backgroundImage = `url(${e.target.result})`;
+            card.style.backgroundSize = 'cover';
+            card.style.backgroundPosition = 'center';
+            const index = Array.from(card.parentNode.children).indexOf(card);
+            saveToLocalStorage(`memory${index}`, e.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      input.click();
+    }
+
+    // Heart counter
+    let heartCount = 0;
+    function addHeart() {
+      heartCount++;
+      document.getElementById('heartCount').textContent = heartCount;
+      localStorage.setItem('heartCount', heartCount);
+      
+      // Create a floating heart at cursor
+      const heart = document.createElement('div');
+      heart.textContent = '♥';
+      heart.style.position = 'fixed';
+      heart.style.color = 'var(--accent)';
+      heart.style.fontSize = '24px';
+      heart.style.pointerEvents = 'none';
+      heart.style.zIndex = '1000';
+      heart.style.animation = 'floatUp 2s ease-out forwards';
+      document.body.appendChild(heart);
+      
+      // Remove after animation
+      setTimeout(() => heart.remove(), 2000);
+    }
+
+    // Song player simulation
+    function playSong() {
+      // Replace with your Spotify/Apple Music link
+      const songUrl = "https://open.spotify.com/";
+      window.open(songUrl, '_blank');
+    }
+
+    function seekSong(event) {
+      const progressBar = event.currentTarget;
+      const rect = progressBar.getBoundingClientRect();
+      const percentage = (event.clientX - rect.left) / rect.width;
+      const progress = progressBar.querySelector('.progress');
+      progress.style.width = (percentage * 100) + '%';
+    }
+
+    // Local storage helpers
+    function saveToLocalStorage(key, value) {
+      localStorage.setItem(key, value);
+    }
+
+    function loadFromLocalStorage(key) {
+      return localStorage.getItem(key);
+    }
+
+    // Load saved data on page load
+    window.addEventListener('load', () => {
+      // Load main photo
+      const savedPhoto = loadFromLocalStorage('mainPhoto');
+      if (savedPhoto) {
+        const photoContainer = document.getElementById('mainPhoto');
+        photoContainer.style.backgroundImage = `url(${savedPhoto})`;
+        photoContainer.style.backgroundSize = 'cover';
+        photoContainer.style.backgroundPosition = 'center';
+        photoContainer.innerHTML = `
+          <div class="hero-card-overlay"></div>
+          <div class="hero-card-caption">I Love You 💕</div>
+        `;
+      }
+
+      // Load story card
+      const savedStory = loadFromLocalStorage('storyCard');
+      if (savedStory) {
+        document.querySelector('.story-card').innerHTML = savedStory;
+      }
+
+      // Load heart count
+      const savedHearts = loadFromLocalStorage('heartCount');
+      if (savedHearts) {
+        heartCount = parseInt(savedHearts);
+        document.getElementById('heartCount').textContent = heartCount;
+      }
+
+      // Load memories
+      for (let i = 0; i < 4; i++) {
+        const memory = loadFromLocalStorage(`memory${i}`);
+        if (memory) {
+          const card = document.querySelectorAll('.memory-card')[i];
+          card.style.backgroundImage = `url(${memory})`;
+          card.style.backgroundSize = 'cover';
+          card.style.backgroundPosition = 'center';
+        }
+      }
+    });
+
+    // Add click effect to all buttons
+    document.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Ripple effect
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.3);
+          transform: scale(0);
+          animation: ripple 0.6s linear;
+          width: ${size}px;
+          height: ${size}px;
+          top: ${y}px;
+          left: ${x}px;
+        `;
+        
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    // Add CSS for ripple effect
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

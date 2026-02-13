@@ -1,340 +1,543 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">  
   <meta charset="UTF-8" />
-  <title>For My Favorite Person</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>for gul · hugs & surprises</title>
+  <style>
+    /* ===== RESET & GLOBAL SMOOTH ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fbeaee 0%, #ffe0e8 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+      line-height: 1.5;
+    }
+
+    /* main glass card */
+    .page {
+      max-width: 1280px;
+      width: 100%;
+      margin: 2rem 1.5rem;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 3.5rem 3.5rem 2.5rem 2.5rem;
+      box-shadow: 0 30px 60px -15px rgba(230, 100, 140, 0.3), 0 10px 30px -10px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255, 240, 245, 0.8);
+      transition: all 0.4s ease;
+    }
+
+    /* ===== NAV (updated links) ===== */
+    .nav {
+      padding: 1.2rem 2.2rem;
+      transition: 0.3s;
+      border-radius: 3rem 3rem 1.5rem 1.5rem;
+    }
+    .nav.scrolled {
+      background: rgba(255, 240, 248, 0.7);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 6px 20px rgba(250, 150, 180, 0.2);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .nav-logo {
+      font-weight: 650;
+      font-size: 1.5rem;
+      background: linear-gradient(145deg, #c44569, #a52d5a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: #773d52;
+      font-weight: 530;
+      font-size: 1.1rem;
+      padding: 0.3rem 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .nav-link:hover {
+      border-bottom-color: #f293b0;
+      color: #b13b60;
+    }
+
+    /* ===== SHELL & HERO ===== */
+    .shell {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 2.8rem;
+      align-items: center;
+      padding: 0.5rem 2rem 3rem 2rem;
+    }
+
+    /* left side */
+    .hero-eyebrow {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #c15b78;
+      background: rgba(255, 220, 235, 0.5);
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(4px);
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 750;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #2f1b24, #bc2f62);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: #6d3f50;
+      margin-bottom: 2rem;
+      font-weight: 350;
+      border-left: 4px solid #ff9bb6;
+      padding-left: 1.2rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin: 2.2rem 0 1.2rem;
+    }
+    .btn-primary, .btn-outline, .btn-hug {
+      border: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 8px 18px -6px #f9a7bb;
+    }
+    .btn-primary {
+      background: linear-gradient(145deg, #ff87aa, #f25782);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+    .btn-primary:hover {
+      transform: scale(1.03) translateY(-3px);
+      background: linear-gradient(145deg, #ff729b, #e94373);
+      box-shadow: 0 18px 26px -10px #f582a8;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #f49bb7;
+      color: #972f57;
+      backdrop-filter: blur(6px);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: #e95384;
+      color: #781f42;
+      transform: scale(1.02);
+    }
+    /* cute hug button special style */
+    .btn-hug {
+      background: #ffe2b0;
+      border: 2px solid #ffb0b0;
+      color: #a53f62;
+      font-size: 1.2rem;
+      padding: 0.8rem 2rem;
+      box-shadow: 0 8px 0 #d48c9c;
+      transform: translateY(0);
+    }
+    .btn-hug:active {
+      transform: translateY(8px);
+      box-shadow: 0 0 0 #d48c9c;
+    }
+    .btn-hug:hover {
+      background: #ffdcaa;
+      border-color: #ff8a8a;
+    }
+    .hero-meta {
+      font-size: 0.95rem;
+      color: #b15974;
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      margin-top: 1.2rem;
+    }
+    .hero-meta::before {
+      content: "💗";
+      font-size: 1.3rem;
+      filter: drop-shadow(0 2px 4px #ffb0c3);
+    }
+
+    /* right card — now with uploaded image */
+    .chip {
+      background: rgba(255, 240, 245, 0.6);
+      backdrop-filter: blur(12px);
+      padding: 0.5rem 1.4rem 0.5rem 1rem;
+      border-radius: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.8rem;
+      border: 1px solid rgba(255, 220, 230, 0.8);
+    }
+    .chip-dot {
+      width: 12px; height: 12px;
+      background: #f5427a;
+      border-radius: 20px;
+      animation: pulse 1.6s infinite;
+    }
+    .hero-card {
+      background: rgba(255, 250, 250, 0.3);
+      backdrop-filter: blur(22px);
+      border-radius: 3rem 3rem 2rem 2rem;
+      padding: 2rem 1.8rem 1.8rem;
+      border: 1px solid rgba(255, 230, 240, 0.7);
+      box-shadow: 0 20px 40px -12px #e5a3b9;
+      transition: 0.3s;
+      min-height: 360px;
+    }
+    .orb {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffd5e2, #ffb0c8);
+      filter: blur(6px);
+      margin-bottom: 1.2rem;
+    }
+    .hero-card-tag {
+      font-weight: 650;
+      color: #ae2d58;
+      font-size: 1.25rem;
+    }
+    .hero-card-text {
+      color: #4c2f3a;
+      margin: 0.8rem 0 1.2rem;
+    }
+    /* image card — now uses assets/us.jpg */
+    .image-card {
+      background: rgba(250, 215, 225, 0.3);
+      border-radius: 2rem;
+      min-height: 200px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 1rem;
+      background-image: url('assets/moon.png');
+      background-size: cover;
+      background-position: center;
+      border: 3px solid #ffb0c0;
+      box-shadow: 0 10px 20px rgba(255, 150, 180, 0.3);
+    }
+    .image-caption {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 60px;
+      padding: 0.5rem 1.2rem;
+      color: #9f1f4b;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.8);
+    }
+
+    /* footer */
+    footer {
+      text-align: center;
+      padding: 1.8rem 2rem;
+      background: rgba(255, 230, 240, 0.3);
+      border-top: 1px solid rgba(255, 200, 215, 0.5);
+      border-radius: 0 0 2.5rem 2.5rem;
+      backdrop-filter: blur(8px);
+      color: #994f68;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    /* floating hearts bg */
+    .floating-hearts {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .floating-heart {
+      position: absolute;
+      color: #ffb0c6;
+      animation: floatAround 22s infinite linear;
+      user-select: none;
+      text-shadow: 0 4px 10px #fda5be;
+    }
+
+    /* hug modal (teddy gif) */
+    .hug-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(15px);
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+    }
+    .hug-modal-content {
+      background: rgba(255, 245, 250, 0.95);
+      backdrop-filter: blur(30px);
+      border-radius: 3rem;
+      max-width: 500px;
+      width: 90%;
+      padding: 2rem 2rem 2.5rem;
+      border: 1px solid white;
+      box-shadow: 0 30px 60px #f598b6;
+      text-align: center;
+    }
+    .hug-gif {
+      font-size: 8rem;
+      line-height: 1;
+      filter: drop-shadow(0 20px 15px #fcaac0);
+      margin: 1rem 0 0.5rem;
+      animation: wobble 1s infinite alternate;
+    }
+    .hug-message {
+      font-size: 2rem;
+      color: #a13159;
+      margin: 0.5rem 0 0;
+    }
+    .hug-sub {
+      color: #b8597c;
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    .close-hug {
+      background: #ffa5c0;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      padding: 0.6rem 2rem;
+      border-radius: 40px;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @keyframes floatAround {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.5; }
+      100% { transform: translateY(-30vh) rotate(360deg); opacity: 0; }
+    }
+    @keyframes pulse { 0% { opacity:0.6; } 50% { opacity:1; background:#ff5588; } }
+    @keyframes wobble {
+      0% { transform: rotate(-5deg) scale(1); }
+      100% { transform: rotate(5deg) scale(1.05); }
+    }
+
+    @media (max-width:700px) { .hero-grid { grid-template-columns:1fr; } }
+  </style>
 </head>
 <body>
-  <!-- Floating Hearts -->
+  <!-- floating hearts background (same on all pages) -->
   <div class="floating-hearts" id="floatingHearts"></div>
 
-  <!-- Photo Upload Modal -->
-  <div class="modal" id="photoModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Add Your Special Photo</h3>
-        <p class="modal-text">Upload a photo that means something to both of us</p>
-      </div>
-      <input type="file" id="photoInput" accept="image/*" style="display: none;">
-      <div class="modal-actions">
-        <button class="btn-primary" onclick="document.getElementById('photoInput').click()">
-          Choose Photo
-        </button>
-        <button class="btn-ghost" onclick="closeModal()">
-          Maybe Later
-        </button>
-      </div>
+  <!-- HUG MODAL pops up with teddy gif -->
+  <div class="hug-modal" id="hugModal">
+    <div class="hug-modal-content">
+      <div class="hug-gif">🧸💞🧸</div>
+      <div class="hug-message">Shivam sends hugs!</div>
+      <div class="hug-sub">tight bear hug — you're wrapped in love</div>
+      <button class="close-hug" onclick="document.getElementById('hugModal').style.display='none'">close 🤗</button>
     </div>
   </div>
 
-  <div class="page">
-    <!-- NAV -->
+  <!-- MAIN HOMEPAGE (visible by default) -->
+  <div id="home-page" class="page" style="display: block;">
     <header class="nav" id="nav">
       <div class="shell nav-inner">
-        <div class="nav-logo">For Gul. 💕</div>
+        <div class="nav-logo">💕 Gul & Shivam's Universe</div>
         <nav class="nav-links">
-          <a href="#story" class="nav-link">Home</a>
-          <a href="./surprise/" class="nav-link">Surprise!</a>
+          <!-- Header buttons: Home, Our Netflix Dashboard, Valentine's Day! -->
+          <a href="/netflix/" class="nav-link" onclick="window.location.href='old-website.html'; return false;">Old Website</a>
+          <a href="/netflix/" class="nav-link" onclick="window.location.href='/netflix/'; return false;">Our Netflix Dashboard</a>
+          <a href="/valentine/" class="nav-link" onclick="window.location.href='/valentine/'; return false;">Valentine's Day!</a>
         </nav>
       </div>
     </header>
-
-    <!-- HERO -->
     <main>
       <section class="hero">
         <div class="shell hero-grid">
           <div>
-            <div class="hero-eyebrow">For my best girl ever!</div>
-            <h1 class="hero-title">Here's a Little Surprise for you.</h1>
-            <p class="hero-subtitle">
-              Thank you for Existing
-              & Making My Life Better.
-            </p>
+            <div class="hero-eyebrow">For my Best Girl Ever.</div>
+            <h1 class="hero-title">Gul, you’re the poetry I never knew</h1>
+            <p class="hero-subtitle">Every moment with you is a little valentine.</p>
             <div class="hero-actions">
-            <a href="./surprise/" class="btn-primary">
-  Explore Gul & Shivam's Journey!
-</a>
-            </button>
+              <!-- First CTA -> surprise1.html -->
+              <a href="./netflix/" class="btn-primary">Our Netflix Premiere ❤️</a>
+              <!-- Second CTA -> surprise2.html -->
+              <a href="./valentine/" class="btn-outline">The Valentine Proposal ❤️</a>
             </div>
-            <div class="hero-meta">
-              Best viewed with your heart open.
-            </div>
+            <!-- Cute Hug button -->
+            <button class="btn-hug" id="hugTrigger">Click here for Virtual Hugs 🧸</button>
+            <div class="hero-meta">Trust me, you deserve all the happiness in the world.</div>
           </div>
-
           <aside>
-            <div class="chip">
-              <span class="chip-dot"></span>
-              Live • from my heart
-            </div>
+            <div class="chip"><span class="chip-dot"></span> Thank you for Existing, My Love. ❤️</div>
             <article class="hero-card">
               <div class="orb"></div>
-              <div class="hero-card-tag">You Deserve This!</div>
-              <p class="hero-card-text">
-                In the world full of choas and distractions, you are my calm. 🥰
-                Enjoy the Surprise.
-              </p>
-             <div class="hero-card-photo" id="mainPhoto" onclick="openPhotoModal()">
-  <div class="hero-card-overlay"></div>
-  <div class="hero-card-caption">
-    Somewhere between your laugh and your eyes, I found my safe place.
-  </div>
-
+              <div class="hero-card-tag">Gul & Shivam's Personal Digital Universe. 🌍❤️</div>
+              <div class="hero-card-text">No matter how far away I am from my home, I never feel homesick because I found my second home in you. ❤️</div>
+              <!-- image card with assets/us.jpg -->
+              <div class="image-card">
+                <div class="image-caption">Perfect Together 💕 </div>
+              </div>
             </article>
           </aside>
         </div>
       </section>
-
     </main>
-
-    <!-- FOOTER -->
-    <footer>
-      Made with too many thoughts about you • <span id="year"></span> •
-      <span id="heartCount">0</span> hearts sent
-    </footer>
+    <footer>from shivam, with love · <span id="year"></span> · <span id="heartCount">0</span> hearts</footer>
   </div>
 
+  <!-- surprise pages are separate html files, so we don't need internal divs for them. 
+       The header links and CTAs directly go to surprise1.html / surprise2.html as requested. 
+       Home stays inside this file. -->
+
   <script>
-    // Initialize
-    document.getElementById("year").textContent = new Date().getFullYear();
-    createFloatingHearts();
-    setupScrollEffect();
+    (function() {
+      // Initialize hearts, year, counters etc.
+      document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Smooth scroll function
-    function scrollToSection(sectionId) {
-      document.getElementById(sectionId).scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-
-    // Create floating hearts
-    function createFloatingHearts() {
-      const container = document.getElementById('floatingHearts');
-      const hearts = ['♥', '💕', '💖', '💗', '💓', '💞', '💝'];
-      
-      for (let i = 0; i < 15; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDelay = Math.random() * 20 + 's';
-        heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
-        heart.style.opacity = Math.random() * 0.5 + 0.3;
-        container.appendChild(heart);
+      // floating hearts generator
+      const heartsContainer = document.getElementById('floatingHearts');
+      const heartSymbols = ['♥', '💕', '💖', '💗', '💓', '💞', '🌸', '🌺', '💘'];
+      for (let i=0; i<20; i++) {
+        const h = document.createElement('div');
+        h.className = 'floating-heart';
+        h.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        h.style.left = Math.random() * 100 + '%';
+        h.style.animationDelay = Math.random() * 15 + 's';
+        h.style.fontSize = (Math.random() * 28 + 14) + 'px';
+        h.style.opacity = Math.random() * 0.4 + 0.2;
+        heartsContainer.appendChild(h);
       }
-    }
 
-    // Nav scroll effect
-    function setupScrollEffect() {
-      const nav = document.getElementById('nav');
+      // nav scroll effect
+      const nav = document.querySelector('.nav');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
+        if (window.scrollY > 30) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
       });
-    }
 
-    // Modal functions
-    function openPhotoModal() {
-      document.getElementById('photoModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('photoModal').style.display = 'none';
-    }
-
-    // Photo upload handling
-    document.getElementById('photoInput').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const photoContainer = document.getElementById('mainPhoto');
-          photoContainer.style.backgroundImage = `url(${e.target.result})`;
-          photoContainer.style.backgroundSize = 'cover';
-          photoContainer.style.backgroundPosition = 'center';
-          photoContainer.innerHTML = `
-            <div class="hero-card-overlay"></div>
-            <div class="hero-card-caption">I Love You 💕</div>
-          `;
-          closeModal();
-          saveToLocalStorage('mainPhoto', e.target.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Edit story card
-    let isEditing = false;
-    function editStoryCard(card) {
-      if (!isEditing) {
-        isEditing = true;
-        card.contentEditable = true;
-        card.focus();
-        document.addEventListener('click', function outsideClick(e) {
-          if (!card.contains(e.target)) {
-            card.contentEditable = false;
-            isEditing = false;
-            saveToLocalStorage('storyCard', card.innerHTML);
-            document.removeEventListener('click', outsideClick);
-          }
+      // Heart counter
+      let heartCount = parseInt(localStorage.getItem('heartCount') || '0');
+      document.querySelectorAll('#heartCount').forEach(el => el.textContent = heartCount);
+      document.querySelectorAll('footer').forEach(f => {
+        f.addEventListener('click', (e) => {
+          heartCount++;
+          localStorage.setItem('heartCount', heartCount);
+          document.querySelectorAll('#heartCount').forEach(el => el.textContent = heartCount);
+          const flying = document.createElement('span');
+          flying.textContent = '💗';
+          flying.style.position = 'absolute';
+          flying.style.left = e.pageX + 'px';
+          flying.style.top = e.pageY + 'px';
+          flying.style.fontSize = '30px';
+          flying.style.pointerEvents = 'none';
+          flying.style.animation = 'floatAround 2s ease-out forwards';
+          document.body.appendChild(flying);
+          setTimeout(() => flying.remove(), 1900);
         });
-      }
-    }
-
-    // Add memory photo
-    function addMemoryPhoto(card) {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = function(e) {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            card.style.backgroundImage = `url(${e.target.result})`;
-            card.style.backgroundSize = 'cover';
-            card.style.backgroundPosition = 'center';
-            const index = Array.from(card.parentNode.children).indexOf(card);
-            saveToLocalStorage(`memory${index}`, e.target.result);
-          };
-          reader.readAsDataURL(file);
-        }
-      };
-      input.click();
-    }
-
-    // Heart counter
-    let heartCount = 0;
-    function addHeart() {
-      heartCount++;
-      document.getElementById('heartCount').textContent = heartCount;
-      localStorage.setItem('heartCount', heartCount);
-      
-      // Create a floating heart at cursor
-      const heart = document.createElement('div');
-      heart.textContent = '♥';
-      heart.style.position = 'fixed';
-      heart.style.color = 'var(--accent)';
-      heart.style.fontSize = '24px';
-      heart.style.pointerEvents = 'none';
-      heart.style.zIndex = '1000';
-      heart.style.animation = 'floatUp 2s ease-out forwards';
-      document.body.appendChild(heart);
-      
-      // Remove after animation
-      setTimeout(() => heart.remove(), 2000);
-    }
-
-    // Song player simulation
-    function playSong() {
-      // Replace with your Spotify/Apple Music link
-      const songUrl = "https://open.spotify.com/";
-      window.open(songUrl, '_blank');
-    }
-
-    function seekSong(event) {
-      const progressBar = event.currentTarget;
-      const rect = progressBar.getBoundingClientRect();
-      const percentage = (event.clientX - rect.left) / rect.width;
-      const progress = progressBar.querySelector('.progress');
-      progress.style.width = (percentage * 100) + '%';
-    }
-
-    // Local storage helpers
-    function saveToLocalStorage(key, value) {
-      localStorage.setItem(key, value);
-    }
-
-    function loadFromLocalStorage(key) {
-      return localStorage.getItem(key);
-    }
-
-    // Load saved data on page load
-    window.addEventListener('load', () => {
-      // Load main photo
-      const savedPhoto = loadFromLocalStorage('mainPhoto');
-      if (savedPhoto) {
-        const photoContainer = document.getElementById('mainPhoto');
-        photoContainer.style.backgroundImage = `url(${savedPhoto})`;
-        photoContainer.style.backgroundSize = 'cover';
-        photoContainer.style.backgroundPosition = 'center';
-        photoContainer.innerHTML = `
-          <div class="hero-card-overlay"></div>
-          <div class="hero-card-caption">I Love You 💕</div>
-        `;
-      }
-
-      // Load story card
-      const savedStory = loadFromLocalStorage('storyCard');
-      if (savedStory) {
-        document.querySelector('.story-card').innerHTML = savedStory;
-      }
-
-      // Load heart count
-      const savedHearts = loadFromLocalStorage('heartCount');
-      if (savedHearts) {
-        heartCount = parseInt(savedHearts);
-        document.getElementById('heartCount').textContent = heartCount;
-      }
-
-      // Load memories
-      for (let i = 0; i < 4; i++) {
-        const memory = loadFromLocalStorage(`memory${i}`);
-        if (memory) {
-          const card = document.querySelectorAll('.memory-card')[i];
-          card.style.backgroundImage = `url(${memory})`;
-          card.style.backgroundSize = 'cover';
-          card.style.backgroundPosition = 'center';
-        }
-      }
-    });
-
-    // Add click effect to all buttons
-    document.querySelectorAll('button').forEach(button => {
-      button.addEventListener('click', function(e) {
-        // Ripple effect
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-          position: absolute;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.3);
-          transform: scale(0);
-          animation: ripple 0.6s linear;
-          width: ${size}px;
-          height: ${size}px;
-          top: ${y}px;
-          left: ${x}px;
-        `;
-        
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-        
-        setTimeout(() => ripple.remove(), 600);
       });
-    });
 
-    // Add CSS for ripple effect
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes ripple {
-        to {
-          transform: scale(4);
-          opacity: 0;
+      // ---- HUG MODAL (teddy gif popup) ----
+      const hugBtn = document.getElementById('hugTrigger');
+      const hugModal = document.getElementById('hugModal');
+      hugBtn.addEventListener('click', () => {
+        hugModal.style.display = 'flex';
+      });
+      // click outside to close? we have a close button but also add optional background click
+      hugModal.addEventListener('click', (e) => {
+        if (e.target === hugModal) hugModal.style.display = 'none';
+      });
+
+      // simple home show function (only used for Home link)
+      window.showHome = function() {
+        // just ensure home page is visible, others are external anyway.
+        // but in this single-file version, hide any other internal pages (none exist now)
+        // keep only home visible (others are separate html files so irrelevant)
+        // just to be safe: ensure home is visible if something tries to hide it.
+        document.getElementById('home-page').style.display = 'block';
+        // update URL hash gently
+        history.pushState({page:'home'}, 'home', '#home');
+      };
+
+      // handle initial hash (just for home)
+      function checkHash() {
+        if (window.location.hash !== '#home') {
+          // default to home
+          showHome();
         }
       }
-    `;
-    document.head.appendChild(style);
+      window.addEventListener('popstate', checkHash);
+      checkHash();
+
+      // ripple effect (optional)
+      document.querySelectorAll('button, .btn-primary, .btn-outline, .btn-hug, .close-hug').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          if (this.classList.contains('close-hug') || this.id === 'hugTrigger') {
+            // still add ripple but keep functionality
+          }
+          const ripple = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size/2;
+          const y = e.clientY - rect.top - size/2;
+          ripple.style.cssText = `
+            position: absolute; border-radius: 50%; background: rgba(255,255,255,0.5);
+            transform: scale(0); animation: ripple 0.6s ease-out;
+            width: ${size}px; height: ${size}px; top: ${y}px; left: ${x}px; pointer-events: none;
+          `;
+          this.style.position = 'relative';
+          this.style.overflow = 'hidden';
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+      const style = document.createElement('style');
+      style.textContent = `@keyframes ripple { to { transform: scale(4); opacity: 0; } }`;
+      document.head.appendChild(style);
+
+      // remove any leftover photo modal / upload references (not needed now)
+      // override any possible openPhotoModal from old code (just in case)
+      window.openPhotoModal = function() { /* do nothing */ };
+    })();
   </script>
 </body>
 </html>
